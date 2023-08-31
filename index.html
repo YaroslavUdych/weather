@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Weather</title>
+		<link rel="stylesheet" href="style.css" />
+		<link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png" />
+		<link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png" />
+		<link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png" />
+		<link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png" />
+		<link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png" />
+		<link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png" />
+		<link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png" />
+		<link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png" />
+		<link rel="icon" type="image/png" sizes="192x192" href="img/favicon/android-icon-192x192.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png" />
+		<link rel="manifest" href="img/favicon/manifest.json" />
+		<meta name="msapplication-TileColor" content="#1e29529c" />
+		<meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png" />
+		<meta name="theme-color" content="#1e29529c" />
+	</head>
+
+	<body>
+		<section class="weather">
+			<div class="loader-wrapper"><div class="loader"></div></div>
+			<section class="weather-search">
+				<input class="input" type="search" placeholder="enter the location and press Enter" />
+				<div id="input-explanation-info" class="input-explanation-info explanation-info-hidden">
+					<span>Input example: "London,ca" or "Montana,us"</span>
+				</div>
+				<div class="city-list"></div>
+				<div id="error-message" class="error-message error-message-hidden">
+					Something went wrong :(<br />
+					Unable to display the weather <br />
+					Try again or later
+				</div>
+				<div id="location-error-message" class="error-message error-message-hidden">No location found</div>
+			</section>
+			<section class="weather-body">
+				<div class="title current-title">Current</div>
+				<section class="current">
+					<div class="current-city">
+						<img src="img/locality.png" alt="" />
+						<span class="current-city-value"></span>
+					</div>
+					<div class="current-icon">
+						<img src="img/02d.svg" alt="" />
+					</div>
+					<div class="current-temperature">
+						<img src="img/thermometer.png" alt="" />
+						<div class="current-temperature-value"></div>
+					</div>
+					<div class="current-date"></div>
+					<div class="current-description"></div>
+					<div class="current-feels-like"></div>
+					<div class="current-humidity-title">Humidity</div>
+					<div class="current-humidity-value"></div>
+					<div class="current-wind-title">Wind</div>
+					<div class="current-wind-value">
+						<span class="current-wind-speed"></span>
+						<img class="current-wind-direction" src="img/arrow-up-8-48.png" alt="" />
+					</div>
+					<div class="current-pressure-title">Pressure</div>
+					<div class="current-pressure-value"></div>
+					<div class="current-cloudiness-title">Cloudiness</div>
+					<div class="current-cloudiness-value"></div>
+					<div class="current-sunrise-title">Sunrise</div>
+					<div class="current-sunrise-value"></div>
+					<div class="current-sunset-title">Sunset</div>
+					<div class="current-sunset-value"></div>
+				</section>
+				<section class="daily-and-hourly">
+					<div class="switch">
+						<div class="switch-line">
+							<div class="switch-slider">Daily</div>
+							<div class="title-left">Daily</div>
+							<div class="title-right">Hourly</div>
+						</div>
+					</div>
+					<section class="daily">
+						<div class="title daily-title">Daily</div>
+						<div class="slider-wrapper">
+							<div class="slide">
+								<div class="daily-date"></div>
+								<div class="daily-icon">
+									<img src="img/09n.svg" alt="weather" />
+								</div>
+								<div class="daily-description"></div>
+								<div class="daily-temp-min-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />min
+								</div>
+								<div class="daily-temp-min-value"></div>
+								<div class="daily-temp-max-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />max
+								</div>
+								<div class="daily-temp-max-value"></div>
+								<div class="daily-temp-morn-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />morn
+								</div>
+								<div class="daily-temp-morn-value"></div>
+								<div class="daily-temp-day-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />day
+								</div>
+								<div class="daily-temp-day-value"></div>
+								<div class="daily-temp-eve-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />eve
+								</div>
+								<div class="daily-temp-eve-value"></div>
+								<div class="daily-temp-night-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />night
+								</div>
+								<div class="daily-temp-night-value"></div>
+								<div class="daily-pop-title">Prob. of precipitation</div>
+								<div class="daily-pop-value"></div>
+								<div class="daily-humidity-title">Humidity</div>
+								<div class="daily-humidity-value"></div>
+								<div class="daily-cloudiness-title">Cloudiness</div>
+								<div class="daily-cloudiness-value"></div>
+								<div class="daily-wind-title">Wind</div>
+								<div class="daily-wind-value">
+									<span class="daily-wind-speed"></span>
+									<img class="daily-wind-direction" src="img/arrow-up-8-48.png" alt="" />
+								</div>
+								<div class="daily-pressure-title">Pressure</div>
+								<div class="daily-pressure-value"></div>
+								<div class="daily-sunrise-title">Sunrise</div>
+								<div class="daily-sunrise-value"></div>
+								<div class="daily-sunset-title">Sunset</div>
+								<div class="daily-sunset-value"></div>
+							</div>
+							<div class="slide">
+								<div class="daily-date"></div>
+								<div class="daily-icon">
+									<img src="img/09n.svg" alt="weather" />
+								</div>
+								<div class="daily-description"></div>
+								<div class="daily-temp-min-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />min
+								</div>
+								<div class="daily-temp-min-value"></div>
+								<div class="daily-temp-max-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />max
+								</div>
+								<div class="daily-temp-max-value"></div>
+								<div class="daily-temp-morn-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />morn
+								</div>
+								<div class="daily-temp-morn-value"></div>
+								<div class="daily-temp-day-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />day
+								</div>
+								<div class="daily-temp-day-value"></div>
+								<div class="daily-temp-eve-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />eve
+								</div>
+								<div class="daily-temp-eve-value"></div>
+								<div class="daily-temp-night-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />night
+								</div>
+								<div class="daily-temp-night-value"></div>
+								<div class="daily-pop-title">Prob. of precipitation</div>
+								<div class="daily-pop-value"></div>
+								<div class="daily-humidity-title">Humidity</div>
+								<div class="daily-humidity-value"></div>
+								<div class="daily-cloudiness-title">Cloudiness</div>
+								<div class="daily-cloudiness-value"></div>
+								<div class="daily-wind-title">Wind</div>
+								<div class="daily-wind-value">
+									<span class="daily-wind-speed"></span>
+									<img class="daily-wind-direction" src="img/arrow-up-8-48.png" alt="" />
+								</div>
+								<div class="daily-pressure-title">Pressure</div>
+								<div class="daily-pressure-value"></div>
+								<div class="daily-sunrise-title">Sunrise</div>
+								<div class="daily-sunrise-value"></div>
+								<div class="daily-sunset-title">Sunset</div>
+								<div class="daily-sunset-value"></div>
+							</div>
+							<div class="slide">
+								<div class="daily-date"></div>
+								<div class="daily-icon">
+									<img src="img/09n.svg" alt="weather" />
+								</div>
+								<div class="daily-description"></div>
+								<div class="daily-temp-min-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />min
+								</div>
+								<div class="daily-temp-min-value"></div>
+								<div class="daily-temp-max-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />max
+								</div>
+								<div class="daily-temp-max-value"></div>
+								<div class="daily-temp-morn-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />morn
+								</div>
+								<div class="daily-temp-morn-value"></div>
+								<div class="daily-temp-day-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />day
+								</div>
+								<div class="daily-temp-day-value"></div>
+								<div class="daily-temp-eve-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />eve
+								</div>
+								<div class="daily-temp-eve-value"></div>
+								<div class="daily-temp-night-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />night
+								</div>
+								<div class="daily-temp-night-value"></div>
+								<div class="daily-pop-title">Prob. of precipitation</div>
+								<div class="daily-pop-value"></div>
+								<div class="daily-humidity-title">Humidity</div>
+								<div class="daily-humidity-value"></div>
+								<div class="daily-cloudiness-title">Cloudiness</div>
+								<div class="daily-cloudiness-value"></div>
+								<div class="daily-wind-title">Wind</div>
+								<div class="daily-wind-value">
+									<span class="daily-wind-speed"></span>
+									<img class="daily-wind-direction" src="img/arrow-up-8-48.png" alt="" />
+								</div>
+								<div class="daily-pressure-title">Pressure</div>
+								<div class="daily-pressure-value"></div>
+								<div class="daily-sunrise-title">Sunrise</div>
+								<div class="daily-sunrise-value"></div>
+								<div class="daily-sunset-title">Sunset</div>
+								<div class="daily-sunset-value"></div>
+							</div>
+							<div class="slide">
+								<div class="daily-date"></div>
+								<div class="daily-icon">
+									<img src="img/09n.svg" alt="weather" />
+								</div>
+								<div class="daily-description"></div>
+								<div class="daily-temp-min-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />min
+								</div>
+								<div class="daily-temp-min-value"></div>
+								<div class="daily-temp-max-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />max
+								</div>
+								<div class="daily-temp-max-value"></div>
+								<div class="daily-temp-morn-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />morn
+								</div>
+								<div class="daily-temp-morn-value"></div>
+								<div class="daily-temp-day-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />day
+								</div>
+								<div class="daily-temp-day-value"></div>
+								<div class="daily-temp-eve-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />eve
+								</div>
+								<div class="daily-temp-eve-value"></div>
+								<div class="daily-temp-night-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />night
+								</div>
+								<div class="daily-temp-night-value"></div>
+								<div class="daily-pop-title">Prob. of precipitation</div>
+								<div class="daily-pop-value"></div>
+								<div class="daily-humidity-title">Humidity</div>
+								<div class="daily-humidity-value"></div>
+								<div class="daily-cloudiness-title">Cloudiness</div>
+								<div class="daily-cloudiness-value"></div>
+								<div class="daily-wind-title">Wind</div>
+								<div class="daily-wind-value">
+									<span class="daily-wind-speed"></span>
+									<img class="daily-wind-direction" src="img/arrow-up-8-48.png" alt="" />
+								</div>
+								<div class="daily-pressure-title">Pressure</div>
+								<div class="daily-pressure-value"></div>
+								<div class="daily-sunrise-title">Sunrise</div>
+								<div class="daily-sunrise-value"></div>
+								<div class="daily-sunset-title">Sunset</div>
+								<div class="daily-sunset-value"></div>
+							</div>
+							<div class="slide">
+								<div class="daily-date"></div>
+								<div class="daily-icon">
+									<img src="img/09n.svg" alt="weather" />
+								</div>
+								<div class="daily-description"></div>
+								<div class="daily-temp-min-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />min
+								</div>
+								<div class="daily-temp-min-value"></div>
+								<div class="daily-temp-max-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />max
+								</div>
+								<div class="daily-temp-max-value"></div>
+								<div class="daily-temp-morn-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />morn
+								</div>
+								<div class="daily-temp-morn-value"></div>
+								<div class="daily-temp-day-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />day
+								</div>
+								<div class="daily-temp-day-value"></div>
+								<div class="daily-temp-eve-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />eve
+								</div>
+								<div class="daily-temp-eve-value"></div>
+								<div class="daily-temp-night-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />night
+								</div>
+								<div class="daily-temp-night-value"></div>
+								<div class="daily-pop-title">Prob. of precipitation</div>
+								<div class="daily-pop-value"></div>
+								<div class="daily-humidity-title">Humidity</div>
+								<div class="daily-humidity-value"></div>
+								<div class="daily-cloudiness-title">Cloudiness</div>
+								<div class="daily-cloudiness-value"></div>
+								<div class="daily-wind-title">Wind</div>
+								<div class="daily-wind-value">
+									<span class="daily-wind-speed"></span>
+									<img class="daily-wind-direction" src="img/arrow-up-8-48.png" alt="" />
+								</div>
+								<div class="daily-pressure-title">Pressure</div>
+								<div class="daily-pressure-value"></div>
+								<div class="daily-sunrise-title">Sunrise</div>
+								<div class="daily-sunrise-value"></div>
+								<div class="daily-sunset-title">Sunset</div>
+								<div class="daily-sunset-value"></div>
+							</div>
+							<div class="slide">
+								<div class="daily-date"></div>
+								<div class="daily-icon">
+									<img src="img/09n.svg" alt="weather" />
+								</div>
+								<div class="daily-description"></div>
+								<div class="daily-temp-min-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />min
+								</div>
+								<div class="daily-temp-min-value"></div>
+								<div class="daily-temp-max-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />max
+								</div>
+								<div class="daily-temp-max-value"></div>
+								<div class="daily-temp-morn-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />morn
+								</div>
+								<div class="daily-temp-morn-value"></div>
+								<div class="daily-temp-day-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />day
+								</div>
+								<div class="daily-temp-day-value"></div>
+								<div class="daily-temp-eve-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />eve
+								</div>
+								<div class="daily-temp-eve-value"></div>
+								<div class="daily-temp-night-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />night
+								</div>
+								<div class="daily-temp-night-value"></div>
+								<div class="daily-pop-title">Prob. of precipitation</div>
+								<div class="daily-pop-value"></div>
+								<div class="daily-humidity-title">Humidity</div>
+								<div class="daily-humidity-value"></div>
+								<div class="daily-cloudiness-title">Cloudiness</div>
+								<div class="daily-cloudiness-value"></div>
+								<div class="daily-wind-title">Wind</div>
+								<div class="daily-wind-value">
+									<span class="daily-wind-speed"></span>
+									<img class="daily-wind-direction" src="img/arrow-up-8-48.png" alt="" />
+								</div>
+								<div class="daily-pressure-title">Pressure</div>
+								<div class="daily-pressure-value"></div>
+								<div class="daily-sunrise-title">Sunrise</div>
+								<div class="daily-sunrise-value"></div>
+								<div class="daily-sunset-title">Sunset</div>
+								<div class="daily-sunset-value"></div>
+							</div>
+							<div class="slide">
+								<div class="daily-date"></div>
+								<div class="daily-icon">
+									<img src="img/09n.svg" alt="weather" />
+								</div>
+								<div class="daily-description"></div>
+								<div class="daily-temp-min-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />min
+								</div>
+								<div class="daily-temp-min-value"></div>
+								<div class="daily-temp-max-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />max
+								</div>
+								<div class="daily-temp-max-value"></div>
+								<div class="daily-temp-morn-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />morn
+								</div>
+								<div class="daily-temp-morn-value"></div>
+								<div class="daily-temp-day-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />day
+								</div>
+								<div class="daily-temp-day-value"></div>
+								<div class="daily-temp-eve-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />eve
+								</div>
+								<div class="daily-temp-eve-value"></div>
+								<div class="daily-temp-night-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />night
+								</div>
+								<div class="daily-temp-night-value"></div>
+								<div class="daily-pop-title">Prob. of precipitation</div>
+								<div class="daily-pop-value"></div>
+								<div class="daily-humidity-title">Humidity</div>
+								<div class="daily-humidity-value"></div>
+								<div class="daily-cloudiness-title">Cloudiness</div>
+								<div class="daily-cloudiness-value"></div>
+								<div class="daily-wind-title">Wind</div>
+								<div class="daily-wind-value">
+									<span class="daily-wind-speed"></span>
+									<img class="daily-wind-direction" src="img/arrow-up-8-48.png" alt="" />
+								</div>
+								<div class="daily-pressure-title">Pressure</div>
+								<div class="daily-pressure-value"></div>
+								<div class="daily-sunrise-title">Sunrise</div>
+								<div class="daily-sunrise-value"></div>
+								<div class="daily-sunset-title">Sunset</div>
+								<div class="daily-sunset-value"></div>
+							</div>
+							<div class="slide">
+								<div class="daily-date"></div>
+								<div class="daily-icon">
+									<img src="img/09n.svg" alt="weather" />
+								</div>
+								<div class="daily-description"></div>
+								<div class="daily-temp-min-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />min
+								</div>
+								<div class="daily-temp-min-value"></div>
+								<div class="daily-temp-max-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />max
+								</div>
+								<div class="daily-temp-max-value"></div>
+								<div class="daily-temp-morn-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />morn
+								</div>
+								<div class="daily-temp-morn-value"></div>
+								<div class="daily-temp-day-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />day
+								</div>
+								<div class="daily-temp-day-value"></div>
+								<div class="daily-temp-eve-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />eve
+								</div>
+								<div class="daily-temp-eve-value"></div>
+								<div class="daily-temp-night-title">
+									<img class="daily-temp-icon" src="img/thermometer.png" alt="temperature" />night
+								</div>
+								<div class="daily-temp-night-value"></div>
+								<div class="daily-pop-title">Prob. of precipitation</div>
+								<div class="daily-pop-value"></div>
+								<div class="daily-humidity-title">Humidity</div>
+								<div class="daily-humidity-value"></div>
+								<div class="daily-cloudiness-title">Cloudiness</div>
+								<div class="daily-cloudiness-value"></div>
+								<div class="daily-wind-title">Wind</div>
+								<div class="daily-wind-value">
+									<span class="daily-wind-speed"></span>
+									<img class="daily-wind-direction" src="img/arrow-up-8-48.png" alt="" />
+								</div>
+								<div class="daily-pressure-title">Pressure</div>
+								<div class="daily-pressure-value"></div>
+								<div class="daily-sunrise-title">Sunrise</div>
+								<div class="daily-sunrise-value"></div>
+								<div class="daily-sunset-title">Sunset</div>
+								<div class="daily-sunset-value"></div>
+							</div>
+							<div class="prev-button" id="daily-prev-button"><span>&#8249;</span></div>
+							<div class="next-button" id="daily-next-button"><span>&#8250;</span></div>
+						</div>
+						<div class="slider-progress-bar" id="daily-progress-bar">
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+						</div>
+					</section>
+					<section class="hourly">
+						<div class="title hourly-title">Hourly</div>
+						<div class="hourly-slider-wrapper">
+							<div class="hourly-slide-item">
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+							</div>
+							<div class="hourly-slide-item">
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+							</div>
+							<div class="hourly-slide-item">
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+							</div>
+							<div class="hourly-slide-item">
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+							</div>
+							<div class="hourly-slide-item">
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+							</div>
+							<div class="hourly-slide-item">
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+							</div>
+							<div class="hourly-slide-item">
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+							</div>
+							<div class="hourly-slide-item">
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+							</div>
+							<div class="hourly-slide-item">
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+							</div>
+							<div class="hourly-slide-item">
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+							</div>
+							<div class="hourly-slide-item">
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+							</div>
+							<div class="hourly-slide-item">
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+								<div class="hourly-slide">
+									<div class="hourly-time"></div>
+									<div class="hourly-date"></div>
+									<div class="hourly-icon">
+										<img src="img/09n.svg" alt="weather" />
+									</div>
+									<div class="hourly-description"></div>
+									<div class="hourly-temperature">
+										<img src="img/thermometer.png" alt="temperature" />
+										<span class="hourly-temperature-value"></span>
+									</div>
+									<div class="hourly-feels-like-title">Feels like</div>
+									<div class="hourly-feels-like-value"></div>
+									<div class="hourly-pop-title">Prob. of precipitation</div>
+									<div class="hourly-pop-value"></div>
+									<div class="hourly-humidity-title">Humidity</div>
+									<div class="hourly-humidity-value"></div>
+									<div class="hourly-cloudiness-title">Cloudiness</div>
+									<div class="hourly-cloudiness-value"></div>
+									<div class="hourly-wind-title">Wind</div>
+									<div class="hourly-wind-value"></div>
+								</div>
+							</div>
+							<div class="prev-button" id="hourly-prev-button"><span>&#8249;</span></div>
+							<div class="next-button" id="hourly-next-button"><span>&#8250;</span></div>
+						</div>
+						<div class="slider-progress-bar" id="hourly-progress-bar">
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+							<div class="slider-progress-item"></div>
+						</div>
+					</section>
+				</section>
+			</section>
+		</section>
+		<script type="module" src="script.js"></script>
+	</body>
+</html>
