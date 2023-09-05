@@ -337,9 +337,17 @@ function showWeather(data) {
 		'hourly-progress-bar'
 	)
 
+	// showing the weather block
 	loader.style.display = 'none'
 
-	// showing the weather block
+	setTimeout(() => {
+		document.querySelector('.weather-body').style.visibility = 'visible'
+		document.querySelector('.weather-search').style.visibility = 'visible'
+		document.querySelector('.weather-body').style.animation = 'showWeather 1s ease forwards'
+		document.querySelector('.weather-search').style.animation = 'showWeather 1s ease forwards'
+		document.querySelector('.current-title').style.visibility = 'visible'
+	}, 200)
+	
 	document.querySelector('.weather-body').style.visibility = 'visible'
 	document.querySelector('.weather-search').style.visibility = 'visible'
 	document.querySelector('.weather-body').style.animation = 'showWeather 1s ease forwards'
